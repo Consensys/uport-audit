@@ -1,14 +1,3 @@
-<!--
-TODO: Add extra artifacts:
-	* checklist
-	* linting
-	* coverage report output
-TODO: Verify that all issues severities are classified according to the terminology.
-TODO: Verify that all issues severities ordered within a section
-TODO: For issues in 'General' section, list the affected contracts, rather than discussing it again for each contract.
-TODO: Add metamask disclaimer per Bill's suggestion.
--->
-
 # 1 - Table of Contents
 
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
@@ -53,7 +42,7 @@ TODO: Add metamask disclaimer per Bill's suggestion.
 
 # 2 - Introduction
 
-From March 4th through March 30th of 2016, ConsenSys conducted an internal security
+From March 4th through April 6th of 2016, ConsenSys conducted an internal security
 audit of the uPort framework authored by the uPort team within ConsenSys.  The findings
 of this audit are presented here in this document.
 
@@ -113,11 +102,6 @@ The following documentation was available to the review team:
 
 The pre-existing tests for https://github.com/uport-project/uport-proxy/ were executed using the truffle framework, run against contracts deployed on a local instance of testrpc.  There were no pre-existing tests available for https://github.com/uport-project/uport-registry/.
 
-testrpc was initiated with 25 accounts for the tests to succeed.
-
-```
-testrpc --accounts 25
-```
 Test results of the pre-existing test battery are available in Appendix 5.
 
 ### Additional testing
@@ -256,21 +240,17 @@ function transfer(address _owner) onlyOwner {
 
 The rest of the Ethereum ecosystem is unknown, but the smart contracts have relative knowledge about its own threat model, and it would be cheap to implement.
 
-
 ### 3.3.4 Prevent invalid contract inputs to the constructors
 
-There are many scenarios where intentionally incorrect input can brick whatever you are doing.
+Severity: **Medium**
+
+There are many scenarios where intentionally incorrect inputs can lead to complete "bricking" the contract system.
 
 This mostly occurs during constructors that don't have any balances or checks. Notably the recovery quorum definitely could result in screw ups. Or examples where contracts reference other contracts that it shouldn't really be capable of doing. eg: doing a transfer on the proxy to the proxy itself. Which means that the "controller" is now the proxy as well. This bricks the identity. At minimum I would recommended that smart contracts should at least protect from obvious bricks, like setting ownership to itself.
 
 #### Recommendation:
 
 In general, this is a subjective choice: should the contract protect the users to some extent, or should the front-end do this?
-
-### 3.3.5 Absence of assertion guards and failure modes
-
-[Ref](https://github.com/ConsenSys/smart-contract-best-practices/blob/b485067ece502e683b80b9a584e459e1096bf8cc/README.md#assert-guards)
-
 
 ### 3.3.6 Test procedures restricted to testrpc
 
@@ -280,15 +260,15 @@ The truffle.js configuration files contains only the default settings for the `d
 
 For the sake of completeness, also run tests on the Ropsten or Kovan test networks.
 
-### 3.3.7 No emergency stop
+### 3.3.5 Absence of assertion guards and emergency circuit breakers
 
-For example, there is no ability to halt Controller or Proxy or Quorum operations upon compromise.
+There are no [assert guards](https://github.com/ConsenSys/smart-contract-best-practices/blob/b485067ece502e683b80b9a584e459e1096bf8cc/README.md#assert-guards) in the contract system to automatically identify when a contract is in an invalid state.
+
+Similarly there is no ability to manually halt the Controller or Proxy or Quorum operations upon compromise via a [circuit breaker](https://github.com/ConsenSys/smart-contract-best-practices/#circuit-breakers-pause-contract-functionality).
 
 #### Recommendation
 
-<!-- TODO: words here
-Really this feels like it could go in a whole new section
--->
+We recognize that such additional fail safe features would come at the cost of added complexity.  Consider implementing a circuit breaker type fail safe, or document the rationale for not doing so.
 
 ## 3.4 Minor
 
@@ -545,43 +525,14 @@ Additionally, adding enforcement of membership boundaries earlier reduces any im
 
 Prevent the creation of a RecoveryQuorum contract with more than the maximum allowed number of delegates.
 
-<!--
-
-#### Delegate management gas consumption may be more highly optimized.
-
-Severity: **Minor**
-
-Garbage collection appears to be fairly heavyweight in terms of gas usage.  Impacted
-	operation is `replaceDelegates()`.  An alternative approach to array management is offered in
-	http://ethereum.stackexchange.com/questions/3373/how-to-clear-large-arrays-without-blowing-the-gas-limit.
-NOTE: This is pending removal unless vetoed by Joseph or Bill
-
-Simon's comment re: garbage collector; https://github.com/uport-project/uport-proxy/blob/master/contracts/Lib1.sol. This is quite gas efficient imho.
-
-To delete an element is a finite time step and quite clever… Take the last element, put into the element to be removed, delete last element and shorten array. bam
-No iteration required
-I would say it is very gas efficient
-	-->
 
 ### 4.6.2 ChangeUserKey() should use delegateIsCurrent(), not delegateRecordExists()
 
 Severity: **Medium**
 
-The ability to call
+It is non-intuitive, and seems possibly incorrect, that any delegate in any state can sign a `userKeyChange`.
 
-
-It doesn't make sense that any delegate in any state can sign a userKeyChange. However, it doesn't looks like this is actually an issue because... (it's not counted in the signature counting operations)
-
-
-<!-- NOTE: this seems more like a general design/arch item
-#### Issue: The number of signatures required cannot be increased directly
-
-Severity: **Medium**
-
-The `neededSignatures()` function always returns `currentDelegateCount/2 + 1`, or "50% plus 1". This places an upper bound on the level of security a user can have, and reduces protections which would prevent delegates from colluding to steel funds or control of the proxy contract.
-
--->
-
+However, we could not identify any vulnerabilities as a result.
 
 ### 4.6.3 The onlyUserKey modifier does not throw when called by another key
 
@@ -639,11 +590,12 @@ This is minor, since it's a stylistic change, because you want to essentially ru
 
 #### Recommendations to address griefing issues
 
-This
+A few possible fixes are evident which could address this:
 
+1. Accept, and document that the function maximum number of delegates is 7.
+2. Adjust the logic to not count newly pending delegates towards the maximum.
 
-
-
+The latter option would likely have a much greater impact on the level of complexity.
 
 ### 4.6.6 No ability to call `changeRecoveryFromRecovery()`
 
@@ -681,27 +633,14 @@ The `replaceDelegates` function performs a number of array manipulations, includ
 
 Upper end usage should be documented. There should also be explicitly tests for "worst case" scenarios. A goal is to minimize the risk of the contract locking itself up, and understand when low block gas limits would start endangering the contract to be able to evaluate the severity and likelihood of such scenarios, and how large the margin of safety is.
 
-<!--
-TODO: ask JC to comment here.
 
-JC: # 10: Deleting a Delegate struct
+### 4.6.10 Deleting a Delegate struct
 
-https://github.com/uport-project/uport-proxy/issues/10
+This needs verification. (TODO: check if "solidity is able to delete a struct without reseting each value initially")
 
-delete delegates[delegateAddresses[i]]; seems like it should work here:
-
-https://github.com/uport-project/uport-proxy/blob/5979d3f121b5b89e58d6712d442f36750d8e37fd/contracts/RecoveryQuorum.sol#L47
+`delete delegates[delegateAddresses[i]];` seems like it should work here:
 
 The generated bytecode from the compiler may also save some gas.
-
-// ### response from: @zmitton
-
-zmitton commented 6 days ago
-can you elaborate on this one? did you mean to highlight this line instead? https://github.com/uport-project/uport-proxy/blob/5979d3f121b5b89e58d6712d442f36750d8e37fd/contracts/RecoveryQuorum.sol#L94
-
-I dont think solidity is able to delete a struct without reseting each value initially, but I can double check -->
-
-<!-- TODO: check if "solidity is able to delete a struct without reseting each value initially" -->
 
 # 5 Test Coverage Analysis
 
@@ -715,7 +654,7 @@ The quality of test coverage was also assessed by inspection of the code.
 
 Many of the tests require long promise chains of, which can be difficult to read.
 
-Consider using the `async/await` pattern when useful. An example can be found here: https://github.com/OpenZeppelin/zeppelin-solidity/pull/97
+Consider using the `async/await` pattern when useful. An example can be found [here](https://github.com/OpenZeppelin/zeppelin-solidity/pull/97)
 
 
 ### 5.2 IdentityFactory
@@ -839,17 +778,15 @@ Coverage: 100%
 
 		https://github.com/uport-project/uport-proxy/issues/5
 
-		JC:
+Since proxy.sol is the highest priority, it should have much more tests, possibly even bordering on the paranoid.
 
-		Since proxy.sol is the highest priority, it should have much more tests, possibly even bordering on the paranoid.
+		Potential tests include the following, as well as mixing combinations of them:
 
-		Seems there should be tests like the following, as well as mixing combinations of them:
-
-		different owners, including an external account, owner is transferred to 0, owner is transferred to address of proxy itself, external owner transferred to a contract, a contract owner transferred to an external account
-		differentdestination like 0, the owner itself, the proxy itself
-		different value, including negative, and 1 wei
-		proxy's balance is <, =, and > than value
-		different data, including length 0, 1, 2, some intermediate length, some large length
+		* different owners, including an external account, owner is transferred to 0, owner is transferred to address of proxy itself, external owner transferred to a contract, a contract owner transferred to an external account
+		* differentdestination like 0, the owner itself, the proxy itself
+		* different value, including negative, and 1 wei
+		* proxy's balance is <, =, and > than value
+		* different data, including length 0, 1, 2, some intermediate length, some large length
 
 
 * Coverage Rating: **good**
@@ -1240,6 +1177,12 @@ $ shasum -a 256 *
 ```
 
 # Appendix 4 - Test Battery Results
+
+In order for the tests to succeed, `testrpc` was initiated with 25 accounts.
+
+```
+testrpc --accounts 25
+```
 
 Results from the pre-existing test battery are provided here for reference.
 
