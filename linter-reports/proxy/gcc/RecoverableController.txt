@@ -1,0 +1,24 @@
+contracts/RecoverableController.sol:4:0: warning: ContractStatement 'RecoverableController' must be preceded by a 2-line gap.
+contracts/RecoverableController.sol:24:28: warning: There should be no whitespace or comments between the opening brace '{' and first item.
+contracts/RecoverableController.sol:24:56: error: Consequent should exist exactly on the line after condition.
+contracts/RecoverableController.sol:24:58: warning: There should be no whitespace or comments between the last item and closing brace '}'.
+contracts/RecoverableController.sol:25:32: warning: There should be no whitespace or comments between the opening brace '{' and first item.
+contracts/RecoverableController.sol:25:64: error: Consequent should exist exactly on the line after condition.
+contracts/RecoverableController.sol:25:66: warning: There should be no whitespace or comments between the last item and closing brace '}'.
+contracts/RecoverableController.sol:27:4: warning: Function 'RecoverableController': in case of more than 3 parameters, drop each into its own line.
+contracts/RecoverableController.sol:40:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoverableController.sol:40:73: error: Function 'signRecoveryChange': Opening brace must be preceded by only a single space.
+contracts/RecoverableController.sol:46:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoverableController.sol:46:79: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoverableController.sol:52:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoverableController.sol:52:74: error: Function 'signControllerChange': Opening brace must be preceded by only a single space.
+contracts/RecoverableController.sol:58:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoverableController.sol:58:77: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoverableController.sol:60:12: warning: 'suicide' is deprecated. Use 'selfdestruct' instead
+contracts/RecoverableController.sol:64:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoverableController.sol:64:68: error: Function 'signUserKeyChange': Opening brace must be preceded by only a single space.
+contracts/RecoverableController.sol:69:28: error: Function 'changeUserKey': Opening brace must be preceded by only a single space.
+contracts/RecoverableController.sol:70:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoverableController.sol:70:71: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoverableController.sol:77:77: error: Function 'changeRecoveryFromRecovery': Opening brace must be preceded by only a single space.
+contracts/RecoverableController.sol:78:72: error: Function 'changeUserKeyFromRecovery': Opening brace must be preceded by only a single space.

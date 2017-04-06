@@ -1,0 +1,8 @@
+
+In contracts/Proxy.sol, line 7:
+contract Proxy is Owned {
+^-- WARNING: ContractStatement 'Proxy' must be preceded by a 2-line gap.
+
+
+1 warning found.
+

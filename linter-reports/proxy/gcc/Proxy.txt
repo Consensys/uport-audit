@@ -1,0 +1,1 @@
+contracts/Proxy.sol:7:0: warning: ContractStatement 'Proxy' must be preceded by a 2-line gap.

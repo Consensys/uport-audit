@@ -1,0 +1,58 @@
+contracts/RecoveryQuorum.sol:5:0: warning: ContractStatement 'RecoveryQuorum' must be preceded by a 2-line gap.
+contracts/RecoveryQuorum.sol:10:4: error: 'Delegate': There should be only a single space and no comments between struct declaration and opening brace.
+contracts/RecoveryQuorum.sol:18:27: warning: There should be no whitespace or comments between the opening brace '{' and first item.
+contracts/RecoveryQuorum.sol:18:68: error: Consequent should exist exactly on the line after condition.
+contracts/RecoveryQuorum.sol:18:70: warning: There should be no whitespace or comments between the last item and closing brace '}'.
+contracts/RecoveryQuorum.sol:20:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:20:70: error: Function 'RecoveryQuorum': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:22:11: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:22:51: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:27:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:28:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:35:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:35:65: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:37:15: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:37:64: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:39:18: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:39:70: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:47:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:47:96: error: Function 'replaceDelegates': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:48:11: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:48:60: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:52:11: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:52:57: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:57:84: error: Function 'collectedSignatures': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:58:11: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:58:60: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:59:146: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:65:56: error: Function 'getAddresses': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:67:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:67:46: error: Function 'neededSignatures': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:69:11: warning: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:69:60: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:70:14: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:70:66: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:70:67: warning: There should be no whitespace or comments between the opening brace '{' and first item.
+contracts/RecoveryQuorum.sol:70:91: warning: There should be no whitespace or comments between the last item and closing brace '}'.
+contracts/RecoveryQuorum.sol:74:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:75:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:80:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:81:10: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:81:78: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:83:14: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:83:54: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:85:18: error: There should be only a single space and no comments between 'else' token and opening brace.
+contracts/RecoveryQuorum.sol:90:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:90:37: error: Function 'garbageCollect': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:92:13: warning: There should be exactly a single space between the 'while' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:92:43: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/RecoveryQuorum.sol:93:14: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/RecoveryQuorum.sol:93:66: error: There should be only a single space and no comments between condition and opening brace.
+contracts/RecoveryQuorum.sol:98:17: error: There should be only a single space and no comments between 'else' token and opening brace.
+contracts/RecoveryQuorum.sol:101:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:101:68: error: Function 'delegateRecordExists': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:104:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:104:65: error: Function 'delegateIsDeleted': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:107:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/RecoveryQuorum.sol:107:65: error: Function 'delegateIsCurrent': Opening brace must be preceded by only a single space.
+contracts/RecoveryQuorum.sol:110:73: error: Function 'delegateHasValidSignature': Opening brace must be preceded by only a single space.

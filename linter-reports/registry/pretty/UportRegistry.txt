@@ -1,0 +1,9 @@
+
+In contracts/UportRegistry.sol, line 2:
+contract UportRegistry{
+^-- WARNING: ContractStatement 'UportRegistry' must be preceded by a 2-line gap.
+^-- ERROR: 'UportRegistry': There should be only a single space and no comments or line break between contract declaration and opening brace.
+
+
+1 error, 1 warning found.
+

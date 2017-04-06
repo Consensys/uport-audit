@@ -1,0 +1,25 @@
+
+In contracts/Owned.sol, line 3:
+contract Owned {
+^-- WARNING: ContractStatement 'Owned' must be preceded by a 2-line gap.
+
+In contracts/Owned.sol, line 5:
+    modifier onlyOwner(){ if (isOwner(msg.sender)) _; }
+                         ^-- WARNING: There should be no whitespace or comments between the opening brace '{' and first item.
+                                                   ^-- ERROR: Consequent should exist exactly on the line after condition.
+                                                     ^-- WARNING: There should be no whitespace or comments between the last item and closing brace '}'.
+
+In contracts/Owned.sol, line 6:
+    modifier ifOwner(address sender) { if(isOwner(sender)) _; }
+                                      ^-- WARNING: There should be no whitespace or comments between the opening brace '{' and first item.
+                                         ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                           ^-- ERROR: Consequent should exist exactly on the line after condition.
+                                                             ^-- WARNING: There should be no whitespace or comments between the last item and closing brace '}'.
+
+In contracts/Owned.sol, line 8:
+    function Owned(){
+                    ^-- ERROR: Function 'Owned': Opening brace must be preceded by only a single space.
+
+
+3 errors, 6 warnings found.
+

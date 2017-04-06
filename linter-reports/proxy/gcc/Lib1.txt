@@ -1,0 +1,9 @@
+contracts/Lib1.sol:2:0: warning: LibraryStatement 'Lib1' must be preceded by a 2-line gap.
+contracts/Lib1.sol:2:0: error: 'Lib1': There should be only a single space and no comments or line break between library declaration and opening brace.
+contracts/Lib1.sol:2:0: warning: Library name 'Lib1' doesn't follow the CamelCase notation.
+contracts/Lib1.sol:3:4: warning: FunctionDeclaration must be succeded by 1 blank line
+contracts/Lib1.sol:3:73: error: Function 'findAddress': Opening brace must be preceded by only a single space.
+contracts/Lib1.sol:4:48: error: There should be only a single space and no comments between while () declaration and opening brace.
+contracts/Lib1.sol:5:14: warning: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+contracts/Lib1.sol:5:28: error: There should be only a single space and no comments between condition and opening brace.
+contracts/Lib1.sol:9:58: error: Function 'removeAddress': Opening brace must be preceded by only a single space.

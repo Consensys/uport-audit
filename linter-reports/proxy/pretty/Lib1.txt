@@ -1,0 +1,28 @@
+
+In contracts/Lib1.sol, line 2:
+library Lib1{
+^-- WARNING: LibraryStatement 'Lib1' must be preceded by a 2-line gap.
+^-- ERROR: 'Lib1': There should be only a single space and no comments or line break between library declaration and opening brace.
+^-- WARNING: Library name 'Lib1' doesn't follow the CamelCase notation.
+
+In contracts/Lib1.sol, line 3:
+    function findAddress(address a, address[] storage arry) returns (int){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                         ^-- ERROR: Function 'findAddress': Opening brace must be preceded by only a single space.
+
+In contracts/Lib1.sol, line 4:
+        for (uint i = 0 ; i < arry.length ; i++){
+                                                ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/Lib1.sol, line 5:
+            if(arry[i] == a){return int(i);}
+              ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                            ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/Lib1.sol, line 9:
+    function removeAddress(uint i, address[] storage arry){
+                                                          ^-- ERROR: Function 'removeAddress': Opening brace must be preceded by only a single space.
+
+
+5 errors, 4 warnings found.
+

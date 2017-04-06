@@ -1,0 +1,21 @@
+
+In contracts/IdentityFactoryWithRecoveryKey.sol, line 4:
+contract IdentityFactoryWithRecoveryKey {
+^-- WARNING: ContractStatement 'IdentityFactoryWithRecoveryKey' must be preceded by a 2-line gap.
+
+In contracts/IdentityFactoryWithRecoveryKey.sol, line 9:
+        address recoveryKey);
+^-- WARNING: Incorrect indentation: Make sure you use 4 SPACES per level and don't precede the code by any comments.
+
+In contracts/IdentityFactoryWithRecoveryKey.sol, line 14:
+    function CreateProxyWithControllerAndRecoveryKey(address userKey, address _recoveryKey, uint longTimeLock, uint shortTimeLock) {
+    ^-- WARNING: 'CreateProxyWithControllerAndRecoveryKey' doesn't follow the mixedCase notation
+    ^-- WARNING: Function 'CreateProxyWithControllerAndRecoveryKey': in case of more than 3 parameters, drop each into its own line.
+
+In contracts/IdentityFactoryWithRecoveryKey.sol, line 20:
+        IdentityCreated(userKey, proxy, controller, _recoveryKey);
+        ^-- WARNING: Function 'IdentityCreated': in case of more than 3 arguments, drop each into its own line.
+
+
+5 warnings found.
+

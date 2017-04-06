@@ -1,0 +1,164 @@
+
+In contracts/RecoveryQuorum.sol, line 5:
+contract RecoveryQuorum {
+^-- WARNING: ContractStatement 'RecoveryQuorum' must be preceded by a 2-line gap.
+
+In contracts/RecoveryQuorum.sol, line 10:
+    struct Delegate{
+    ^-- ERROR: 'Delegate': There should be only a single space and no comments between struct declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 18:
+    modifier onlyUserKey(){ if (msg.sender == controller.userKey()) _; }
+                           ^-- WARNING: There should be no whitespace or comments between the opening brace '{' and first item.
+                                                                    ^-- ERROR: Consequent should exist exactly on the line after condition.
+                                                                      ^-- WARNING: There should be no whitespace or comments between the last item and closing brace '}'.
+
+In contracts/RecoveryQuorum.sol, line 20:
+    function RecoveryQuorum(address _controller, address[] _delegates){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                      ^-- ERROR: Function 'RecoveryQuorum': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 22:
+        for(uint i = 0; i < _delegates.length; i++){
+           ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                   ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 27:
+    function signUserChange(address proposedUserKey) {
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+
+In contracts/RecoveryQuorum.sol, line 28:
+        if(delegateRecordExists(delegates[msg.sender])) {
+          ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+
+In contracts/RecoveryQuorum.sol, line 35:
+        if(collectedSignatures(newUserKey) >= neededSignatures()){
+          ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                                 ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 37:
+            for(uint i = 0 ; i < delegateAddresses.length ; i++){
+               ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                                ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 39:
+                if(delegates[delegateAddresses[i]].pendingUntil > now){ 
+                  ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                                      ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 47:
+    function replaceDelegates(address[] delegatesToRemove, address[] delegatesToAdd) onlyUserKey{
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                                                ^-- ERROR: Function 'replaceDelegates': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 48:
+        for(uint i = 0 ; i < delegatesToRemove.length ; i++){
+           ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                            ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 52:
+        for(uint j = 0 ; j < delegatesToAdd.length ; j++){
+           ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                         ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 57:
+    function collectedSignatures(address _proposedUserKey) returns (uint signatures){
+                                                                                    ^-- ERROR: Function 'collectedSignatures': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 58:
+        for(uint i = 0 ; i < delegateAddresses.length ; i++){
+           ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                            ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 59:
+            if (delegateHasValidSignature(delegates[delegateAddresses[i]]) && delegates[delegateAddresses[i]].proposedUserKey == _proposedUserKey){
+                                                                                                                                                  ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 65:
+    function getAddresses() constant returns (address[]){ return delegateAddresses; }
+                                                        ^-- ERROR: Function 'getAddresses': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 67:
+    function neededSignatures() returns (uint){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                              ^-- ERROR: Function 'neededSignatures': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 69:
+        for(uint i = 0 ; i < delegateAddresses.length ; i++){
+           ^-- WARNING: There should be exactly a single space between the 'for' token and the parenthetic block representing the conditional.
+                                                            ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 70:
+            if(delegateIsCurrent(delegates[delegateAddresses[i]])){ currentDelegateCount++; }
+              ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                                  ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+                                                                   ^-- WARNING: There should be no whitespace or comments between the opening brace '{' and first item.
+                                                                                           ^-- WARNING: There should be no whitespace or comments between the last item and closing brace '}'.
+
+In contracts/RecoveryQuorum.sol, line 74:
+    function addDelegate(address delegate) private {
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+
+In contracts/RecoveryQuorum.sol, line 75:
+        if(!delegateRecordExists(delegates[delegate]) && delegateAddresses.length < 15) {
+          ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+
+In contracts/RecoveryQuorum.sol, line 80:
+    function removeDelegate(address delegate) private {
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+
+In contracts/RecoveryQuorum.sol, line 81:
+        if(delegates[delegate].deletedAfter > controller.longTimeLock() + now){ 
+          ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                                              ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 83:
+            if(delegates[delegate].pendingUntil > now){ 
+              ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                      ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 85:
+            } else{
+                  ^-- ERROR: There should be only a single space and no comments between 'else' token and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 90:
+    function garbageCollect() private{
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                     ^-- ERROR: Function 'garbageCollect': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 92:
+        while(i < delegateAddresses.length){
+             ^-- WARNING: There should be exactly a single space between the 'while' token and the parenthetic block representing the conditional.
+                                           ^-- ERROR: There should be only a single space and no comments between while () declaration and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 93:
+            if(delegateIsDeleted(delegates[delegateAddresses[i]])){
+              ^-- WARNING: There should be exactly a single space between the 'if' token and the parenthetic block representing the conditional.
+                                                                  ^-- ERROR: There should be only a single space and no comments between condition and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 98:
+            }else{i++;}
+                 ^-- ERROR: There should be only a single space and no comments between 'else' token and opening brace.
+
+In contracts/RecoveryQuorum.sol, line 101:
+    function delegateRecordExists(Delegate d) private returns (bool){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                    ^-- ERROR: Function 'delegateRecordExists': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 104:
+    function delegateIsDeleted(Delegate d) private returns (bool){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                 ^-- ERROR: Function 'delegateIsDeleted': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 107:
+    function delegateIsCurrent(Delegate d) private returns (bool){
+    ^-- WARNING: FunctionDeclaration must be succeded by 1 blank line
+                                                                 ^-- ERROR: Function 'delegateIsCurrent': Opening brace must be preceded by only a single space.
+
+In contracts/RecoveryQuorum.sol, line 110:
+    function delegateHasValidSignature(Delegate d) private returns (bool){
+                                                                         ^-- ERROR: Function 'delegateHasValidSignature': Opening brace must be preceded by only a single space.
+
+
+28 errors, 30 warnings found.
+

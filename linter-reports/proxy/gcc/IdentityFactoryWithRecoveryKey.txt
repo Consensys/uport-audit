@@ -1,0 +1,5 @@
+contracts/IdentityFactoryWithRecoveryKey.sol:4:0: warning: ContractStatement 'IdentityFactoryWithRecoveryKey' must be preceded by a 2-line gap.
+contracts/IdentityFactoryWithRecoveryKey.sol:9:0: warning: Incorrect indentation: Make sure you use 4 SPACES per level and don't precede the code by any comments.
+contracts/IdentityFactoryWithRecoveryKey.sol:14:4: warning: 'CreateProxyWithControllerAndRecoveryKey' doesn't follow the mixedCase notation
+contracts/IdentityFactoryWithRecoveryKey.sol:14:4: warning: Function 'CreateProxyWithControllerAndRecoveryKey': in case of more than 3 parameters, drop each into its own line.
+contracts/IdentityFactoryWithRecoveryKey.sol:20:8: warning: Function 'IdentityCreated': in case of more than 3 arguments, drop each into its own line.

@@ -1,0 +1,21 @@
+
+In contracts/IdentityFactory.sol, line 4:
+contract IdentityFactory {
+^-- WARNING: ContractStatement 'IdentityFactory' must be preceded by a 2-line gap.
+
+In contracts/IdentityFactory.sol, line 9:
+        address recoveryQuorum);
+^-- WARNING: Incorrect indentation: Make sure you use 4 SPACES per level and don't precede the code by any comments.
+
+In contracts/IdentityFactory.sol, line 14:
+    function CreateProxyWithControllerAndRecovery(address userKey, address[] delegates, uint longTimeLock, uint shortTimeLock) {
+    ^-- WARNING: 'CreateProxyWithControllerAndRecovery' doesn't follow the mixedCase notation
+    ^-- WARNING: Function 'CreateProxyWithControllerAndRecovery': in case of more than 3 parameters, drop each into its own line.
+
+In contracts/IdentityFactory.sol, line 21:
+        IdentityCreated(userKey, proxy, controller, recoveryQuorum);
+        ^-- WARNING: Function 'IdentityCreated': in case of more than 3 arguments, drop each into its own line.
+
+
+5 warnings found.
+
