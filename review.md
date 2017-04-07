@@ -38,8 +38,6 @@
 
 <!-- /TOC -->
 
-
-
 # 2 - Introduction
 
 From March 4th through April 6th of 2016, ConsenSys conducted an internal security
@@ -252,9 +250,9 @@ This mostly occurs during constructors that don't have any balances or checks. N
 
 In general, this is a subjective choice: should the contract protect the users to some extent, or should the front-end do this?
 
-### 3.3.6 Test procedures restricted to testrpc
+### 3.3.6 Test procedures restricted to `testrpc`
 
-The truffle.js configuration files contains only the default settings for the `development` network, which suggests that the test suite has only been run on `testrpc`.
+The `truffle.js` configuration files contains only the default settings for the `development` network, which suggests that the test suite has only been run on `testrpc`.
 
 #### Recommendation
 
@@ -406,7 +404,7 @@ The proxy contract is intended to be permanent. It cannot be upgraded without ch
 
 ### 4.5.1 The proxy cannot to directly create a contract
 
-Severity: **Medium***
+Severity: **Medium**
 
 The ability to publish a contract from the proxy is lacking. This decision may be somewhat less 'future-proof', if the need to publish a contract _directly_ from the proxy is someday deemed highly valuable.
 
@@ -416,19 +414,7 @@ Alternatively, the Uport team may elect to provide a generalized contract factor
 
 Provide documentation outlining the motivation for this design decision, and the alternative contract creation methods available to uPort users. We acknowledge that this would add considerable complexity to the contract design, particularly given solidity currently lacks the necessary high level syntax.
 
-### 4.5.2 Proxy should allow option to specify gas amount
-
-Severity: **Medium**
-
-Whilst external accounts can set the gas they want to use, uPort proxies by default forward all the gas. This could cause issues when a user would prefer to not forward all the gas.
-
-#### Recommendation
-
-Forward all the gas by default, but provide the option (if set) to send only a specific amount of gas.
-
-<!-- QUESTION: I'm not sure this makes sense. Why would a sender include more gas than the proxy is allowed to forward? -->
-
-### 4.5.3 Obsolete comment included in the code
+### 4.5.2 Obsolete comment included in the code
 
 Severity: **Medium**
 
@@ -438,7 +424,7 @@ The comments state that stack depth is an issue. This is however, no longer an i
 
 Remove the comment.
 
-### 4.5.4 Use of a magic number for `delegate.deletedAfter` value
+### 4.5.3 Use of a magic number for `delegate.deletedAfter` value
 
 Severity: **Minor**
 
@@ -452,20 +438,8 @@ At minimum the significance of this value should be clarified in a comment. Sett
 
 Source File: [`contracts/RecoverableController.sol`](https://github.com/uport-project/uport-proxy/blob/5979d3f121b5b89e58d6712d442f36750d8e37fd/contracts/RecoverableController.sol)
 
-### 4.6.1 Controller should send value to the proxy on `selfdestruct`
 
-Severity: **Medium**
-
-Although the `RecoverableController` is not intended to hold ether funds, there is no way to prevent this if they are [forcibly sent](https://github.com/ConsenSys/smart-contract-best-practices#remember-that-ether-can-be-forcibly-sent-to-an-account).
-
-When the `changeController()` calls `suicide(proposedController)`, funds are forcibly sent to the `proposedController` contract, which presumably would also not be designed to hold funds.
-
-#### Recommendation
-
-Change to `selfdestruct(proxy)`.
-
-
-### 4.6.2 The `suicide()` function is deprecated
+### 4.6.1 The `suicide()` function is deprecated
 
 Severity: **Medium**
 
@@ -480,6 +454,18 @@ This is especially pertinent in a context which uses contracts as identities.
 #### Recommendation
 
 Use `selfdestruct()`.
+
+### 4.6.2 Controller should send value to the proxy on `selfdestruct`
+
+Severity: **Medium**
+
+Although the `RecoverableController` is not intended to hold ether funds, there is no way to prevent this if they are [forcibly sent](https://github.com/ConsenSys/smart-contract-best-practices#remember-that-ether-can-be-forcibly-sent-to-an-account).
+
+When the `changeController()` calls `suicide(proposedController)`, funds are forcibly sent to the `proposedController` contract, which presumably would also not be designed to hold funds.
+
+#### Recommendation
+
+Change to `selfdestruct(proxy)`.
 
 
 ### 4.6.3 Inconsistent event logging
@@ -562,7 +548,7 @@ Although the `constant` keyword does not have an impact on the bytecode output, 
 
 Although the intent is to keep the delegates around who are earmarked to be deleted (`deletedAfter`), this can cause several issues.
 
-##### 4.6.5.2 Garbage collector griefing: Max delegates (15) griefing. Can't add new delegates until after `longTimeLock`
+##### 4.6.5.2 Garbage collector griefing: Max delegates (15) griefing. Can't add new delegates until after `longTimeLock`.
 
 Severity: **Medium**
 
@@ -605,7 +591,7 @@ The `RecoveryQuorum` has no code which calls `RecoverableController.changeRecove
 
 #### Recommendation
 
-Remove the `changeRecoveryFromRecovery()` function from RecoverableController.sol.
+Remove the `changeRecoveryFromRecovery()` function from `RecoverableController.sol`.
 
 
 #### 4.6.7 Constructor should use `addDelegate()` to enforce duplicate & length checks.
@@ -665,55 +651,44 @@ Coverage: 100%
 
 #### Test Output
 
-    * ✓ Correctly creates proxy, controller, and recovery contracts (1226ms)
-		* ✓ Created proxy should have correct code
-		* ✓ Created controller should have correct code
-		* ✓ Created recoveryQuorum should have correct code
-		* ✓ Mapping should have the same address as event
-    * ✓ Created proxy should have correct state
-    * ✓ Created controller should have correct state (96ms)
-    * ✓ Created ID should have the following behavior (9176ms)
-		* ✓ Non delegate signs and the userKey shouldn't change
-		* ✓ Non delegate signs and the collectedSigs shouldn't increment
-		* ✓ Added delegate has the correct state
-		* ✓ Pending delegate signs, collectedSigs shouldn't reflect delegate sig
-		* ✓ Pending delegate signs, changeUserKey no effect while pendingDelegate
-		* ✓ After timeLock period collectedSigs should reflect the vote
-		* ✓ changeUserKey should effect userKey after delegate has waited
-		* ✓ After the recovery, signatures reset
-    * ✓ Created ID should have the following behavior (12355ms)
- 		* ✓ collectedSigs is zero, pending delegate and votes don't count
-		* ✓ User key shouldn't change because 2 votes are pending
-		* ✓ collectedSigs is two because 2 of the 4 votes are pending
-		* ✓ User key shouldn't change because delegate1 already signed
-		* ✓ collectedSigs shouldn't change because delegate1 already signed
-		* ✓ collectedSigs is 4 because of votes from delegates 2, 3, 5 and 6
-		* ✓ User key shouldn't change because recoveryUser1 only has 1 vote
-		* ✓ User key should change because recoveryUser2 has 3 votes
-		* ✓ collectedSigs is only 2 because delegate 1's vote gets reset after recover
-		* ✓ User key change request fails due to 2 votes (not enough)
-		* ✓ User key change succeeds in face of adversarial delegate deletion
+```
+		✓ Correctly creates proxy, controller, and recovery contracts (1226ms)
+		✓ Created proxy should have correct code
+		✓ Created controller should have correct code
+		✓ Created recoveryQuorum should have correct code
+		✓ Mapping should have the same address as event
+    ✓ Created proxy should have correct state
+    ✓ Created controller should have correct state (96ms)
+    ✓ Created ID should have the following behavior (9176ms)
+		✓ Non delegate signs and the userKey shouldn't change
+		✓ Non delegate signs and the collectedSigs shouldn't increment
+		✓ Added delegate has the correct state
+		✓ Pending delegate signs, collectedSigs shouldn't reflect delegate sig
+		✓ Pending delegate signs, changeUserKey no effect while pendingDelegate
+		✓ After timeLock period collectedSigs should reflect the vote
+		✓ changeUserKey should effect userKey after delegate has waited
+		✓ After the recovery, signatures reset
+    ✓ Created ID should have the following behavior (12355ms)
+ 		✓ collectedSigs is zero, pending delegate and votes don't count
+		✓ User key shouldn't change because 2 votes are pending
+		✓ collectedSigs is two because 2 of the 4 votes are pending
+		✓ User key shouldn't change because delegate1 already signed
+		✓ collectedSigs shouldn't change because delegate1 already signed
+		✓ collectedSigs is 4 because of votes from delegates 2, 3, 5 and 6
+		✓ User key shouldn't change because recoveryUser1 only has 1 vote
+		✓ User key should change because recoveryUser2 has 3 votes
+		✓ collectedSigs is only 2 because delegate 1's vote gets reset after recover
+		✓ User key change request fails due to 2 votes (not enough)
+		✓ User key change succeeds in face of adversarial delegate deletion
+```
 
 #### Coverage Notes:
 
-    During validation of created identity behavior (specifically validation that
-    added delegate has the correct state (lines 126-129), parameterization of
-    quorum.delegates array assignments such that access indexer labels are
-    "delegateProposedUserKey" *and* "delegatePendingUntil" is a suspicious
-    implementation pattern as indexer labels are typically drawn from a
-    strictly-typed non-repeatable set.
+    During validation of created identity behavior (specifically validation that added delegate has the correct state (lines 126-129), parameterization of quorum.delegates array assignments such that access indexer labels are "delegateProposedUserKey" *and* "delegatePendingUntil" is a suspicious implementation pattern as indexer labels are typically drawn from a strictly-typed non-repeatable set.
 
-    A better alignment between the mental model of the programmer (code exercised)
-    and auditer (documentation of test output) is desired.  For example on line 184,
-    "pending delegate votes dont count yet" provides tighter alignment if replaced with
-    "collected signatures does not meet threshold, pending delegate votes dont count".
-    Additional improvements to align mental models between the source code and the documented
-    test results are available on lines 190, 194, 193, 198, 200, 207, 212, 217, 223,
-    227, and 234.
-
+    A better alignment between the mental model of the programmer (code exercised) and auditor (documentation of test output) is desired.  For example on line 184 "pending delegate votes don't count yet" provides tighter alignment if replaced with "collected signatures does not meet threshold, pending delegate votes don't count". Additional improvements to align mental models between the source code and the documented test results are available on lines 190, 194, 193, 198, 200, 207, 212, 217, 223, 227, and 234.
 
 * Coverage Rating: **good**
-
 
 ### 5.2 IdentityFactoryWithRecoveryKey
 
@@ -731,7 +706,7 @@ Coverage: 100%
     * ✓ Created proxy should have correct state
     * ✓ Created controller should have correct state (92ms)
 
-* Coverage Rating:
+* Coverage Rating: **good**
 
 
 ### 5.3 Owned
@@ -752,7 +727,6 @@ Coverage: 100%
 
 * Coverage Rating: **good**
 
-* Coverage Notes: simple interface makes
 
 
 ### 5.4 Proxy
@@ -771,22 +745,18 @@ Coverage: 100%
 
 * Coverage Notes:
 
-    A better alignment between the mental model of the programmer (code exercised)
-    and auditor (documented test results) is desired.  For example on lines 41-42
-    and 57-59 a plain language explanation of the assertions being validated will
-    aid any reviewer or auditor.
+    A better alignment between the mental model of the programmer (code exercised) and auditor (documented test results) is desired.  For example on lines 41-42 and 57-59 a plain language explanation of the assertions being validated will aid any reviewer or auditor.
 
 		https://github.com/uport-project/uport-proxy/issues/5
 
 Since proxy.sol is the highest priority, it should have much more tests, possibly even bordering on the paranoid.
 
 		Potential tests include the following, as well as mixing combinations of them:
-
 		* different owners, including an external account, owner is transferred to 0, owner is transferred to address of proxy itself, external owner transferred to a contract, a contract owner transferred to an external account
-		* differentdestination like 0, the owner itself, the proxy itself
-		* different value, including negative, and 1 wei
-		* proxy's balance is <, =, and > than value
-		* different data, including length 0, 1, 2, some intermediate length, some large length
+		* different `destination` like 0, the owner itself, the proxy itself
+		* different `value`, including negative, and 1 wei
+		* proxy's balance is <, =, and > than `value`
+		* different `data`, including length 0, 1, 2, some intermediate length, some large length
 
 
 * Coverage Rating: **good**
