@@ -1,6 +1,6 @@
 # Uport Audit
 
-From March 4th through April 6th of 2016, ConsenSys conducted an internal security audit of the uPort framework authored by the uPort team within ConsenSys.
+From March 4th through April 6th of 2017, ConsenSys conducted an internal security audit of the uPort framework authored by the uPort team within ConsenSys.
 
 This repository holds the artifacts from that audit.
 
